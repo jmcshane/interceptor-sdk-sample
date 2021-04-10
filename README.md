@@ -45,6 +45,32 @@ $ ko apply -f config/
 This will create your interceptor and allow you to address it using the Triggers
 Interceptor Plugin reference.
 
+### Referencing Custom Interceptors in Triggers
+
+Once you have your named interceptors, they can be invoked in the `interceptors` block
+of a `Trigger`:
+
+```
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: trigger
+  namespace: default
+spec:
+  interceptors:
+  - ref:
+      kind: ClusterInterceptor
+      name: interceptor
+    params:
+    - name: my-param
+      value: a-parameter-value
+  template:
+    ref: sample-template
+```
+
+You can deploy the existing interceptor code as is and see it invoked in the interceptor chain
+if you turn debug logging on the eventlistener.
+
 ## Customization
 
 ### Go Module Path
@@ -66,3 +92,4 @@ that must be written is using the parameters of the interceptor request to parse
 data (body, headers, and extensions) into an InterceptorResponse object. The InterceptorResponse
 can determine if Trigger processing should continue, if any new extensions should be added,
 or can return an error status message.
+
