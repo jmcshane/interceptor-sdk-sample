@@ -1,0 +1,15 @@
+#@ load("@ytt:data", "data")
+
+#@ for path in data.values.paths:
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: ClusterInterceptor
+metadata:
+  name: #@ path
+spec:
+  clientConfig:
+    service:
+      name: #@ data.values.name
+      namespace: #@ data.values.namespace
+      path: #@ "/" + path
+#@ end
