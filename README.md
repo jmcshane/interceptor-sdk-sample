@@ -1,11 +1,9 @@
 # Tekton Triggers Interceptor SDK
 
 This project simplifies the process of creating a custom interceptor to be used
-as a Tekton interceptor plugin. The project does the following:
-
-* Templates the necessary Kubernetes resources to run the interceptor
-* Sets up the go binary entrypoint and HTTP server
-* Handles the interceptor request JSON object and parses into components
+as a Tekton interceptor plugin. The project demonstrates how to use the
+triggers interceptor-sdk to create a custom interceptor for use with
+the triggers project.
 
 Consumers of this library need to write a single function that implements
 the Interceptor interface in order to execute their custom interceptor logic.
@@ -81,9 +79,7 @@ current module path with your desired path in the project.
 ### Interceptor Package
 
 The package provided to you for implementing your interceptor is [pkg/interceptor](pkg/interceptor/).
-This is referenced in the `server.go` file as an import and running the `NewInterceptor` function. If
-you want to change the package name, you will also need to update the import path in the `server.go` 
-file in `pkg/server`.
+The interceptor-sdk runs the `NewInterceptor` function to get access to an instance of the required interface.
 
 The logic of the interceptor can then be implemented inside of the `Process` function in the
 `interceptor` package. This function is intended to encapsulate all the mechanism of passing

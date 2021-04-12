@@ -3,6 +3,7 @@ package interceptor
 import (
 	"context"
 
+	"github.com/tektoncd/triggers/pkg/apis/triggers/v1alpha1"
 	triggersv1 "github.com/tektoncd/triggers/pkg/apis/triggers/v1alpha1"
 	"go.uber.org/zap"
 	"k8s.io/client-go/kubernetes"
@@ -10,16 +11,13 @@ import (
 
 var _ triggersv1.InterceptorInterface = (*Interceptor)(nil)
 
-// Interceptor implements a CEL based interceptor that uses CEL expressions
-// against the incoming body and headers to match, if the expression returns
-// a true value, then the interception is "successful".
 type Interceptor struct {
 	KubeClientSet kubernetes.Interface
 	Logger        *zap.SugaredLogger
 }
 
 // NewInterceptor creates a prepopulated Interceptor.
-func NewInterceptor(k kubernetes.Interface, l *zap.SugaredLogger) *Interceptor {
+func NewInterceptor(k kubernetes.Interface, l *zap.SugaredLogger) v1alpha1.InterceptorInterface {
 	return &Interceptor{
 		Logger:        l,
 		KubeClientSet: k,
