@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/instance: default
     app.kubernetes.io/part-of: tekton-triggers
 data:
-  # Common configuration for all knative codebase
   zap-logger-config: |
     {
       "level": "info",
@@ -35,7 +34,7 @@ data:
         "callerEncoder": ""
       }
     }
-  # To configure logging levels, this key must match the string argument
-  # used in the main.go file to the InterceptorMainWithConfig function
-  # loglevel.<arg>
+  #! To configure logging levels, this key must match the string argument
+  #! used in the main.go file to the InterceptorMainWithConfig function
+  #! loglevel.<arg>
   loglevel.interceptors: "info"
