@@ -34,7 +34,7 @@ spec:
       serviceAccountName: tekton-triggers-custom-interceptor
       containers:
       - name: #@ data.values.name
-        image: #@ "ko://" + data.values.package + "/cmd/interceptor"
+        image: #@ "ko://" + data.values.package
         args: [
           "-logtostderr",
           "-stderrthreshold", "INFO",
